@@ -5,13 +5,13 @@
 function clearAll() {
     const memeContainer = document.querySelector(".meme-content");
     const funnyContainer = document.querySelector(".funny-content");
-    const quoteContainer = document.querySelector(".quote-content");
+    const quoteContainer = document.querySelector(".wisdom-content");
     const riddleContainer = document.querySelector(".riddle-content");
 
     memeContainer.innerHTML = "";
     funnyContainer.innerHTML = "";
-    // quoteContainer.innerHTML = "";
-    // riddleContainer.innerHTML = "";
+    quoteContainer.innerHTML = "";
+    riddleContainer.innerHTML = "";
 }
 
 /**
@@ -70,6 +70,25 @@ function showQuote() {
 function showRiddle() {
     // Value should be in format: { question: '', answer: '' }
     const randomRiddle = getRandomData("riddles");
+    // const question = randomRiddle.question;
+    // const answer = randomRiddle.answer;
+    const { question, answer } = randomRiddle;
+
+    const questionElem = document.createElement("p");
+    questionElem.textContent = question;
+
+    const answerElem = document.createElement("p");
+    answerElem.textContent = "The answer is: " + answer;
+
+    answerElem.setAttribute("id", "riddle-answer");
+    answerElem.hidden = true;
+
+    const container = document.querySelector(".riddle-content");
+
+    clearAll();
+
+    container.appendChild(questionElem);
+    container.appendChild(answerElem);
 }
 
 /**
@@ -79,7 +98,18 @@ function showRiddle() {
  *   that the answer is already revealed
  * - If there is a riddle shown but no answer, unhide the answer!
  */
-function revealAnswers() {}
+function revealAnswers() {
+    const riddleContainer = document.querySelector(".riddle-content");
+    const riddle = riddleContainer.querySelector("p");
+    const answer = document.querySelector("#riddle-answer");
+    if (riddle && answer.hidden) {
+        answer.hidden = false;
+    } else if (riddle) {
+        alert("The answer is already revealed");
+    } else {
+        alert("There is no riddle to reveal the answer to!");
+    }
+}
 
 /**
  * This function is used to get random data.  Don't worry about how it works, just know how to use it.  Usage is pre-filled in the functions above already, but here's an explanation of the function anyways.
