@@ -2,7 +2,17 @@
  * TODO: Implement a function that clears all the content
  * prior to generating new random content
  */
-function clearAll() {}
+function clearAll() {
+    const memeContainer = document.querySelector(".meme-content");
+    const funnyContainer = document.querySelector(".funny-content");
+    const quoteContainer = document.querySelector(".quote-content");
+    const riddleContainer = document.querySelector(".riddle-content");
+
+    memeContainer.innerHTML = "";
+    funnyContainer.innerHTML = "";
+    // quoteContainer.innerHTML = "";
+    // riddleContainer.innerHTML = "";
+}
 
 /**
  * TODO:
@@ -12,6 +22,11 @@ function clearAll() {}
 function showMeme() {
     // Value is a string representing image URL
     const randomMemeUrl = getRandomData("memes");
+    const container = document.querySelector(".meme-content");
+    const newImg = document.createElement("img");
+    newImg.setAttribute("src", randomMemeUrl);
+    clearAll();
+    container.appendChild(newImg);
 }
 
 /**
@@ -22,6 +37,10 @@ function showMeme() {
 function showJoke() {
     // Value is a string representing the joke
     const randomJokeText = getRandomData("jokes");
+    const newP = document.createElement("p");
+    newP.textContent = randomJokeText;
+    clearAll();
+    document.querySelector(".funny-content").appendChild(newP);
 }
 
 /**
@@ -32,6 +51,14 @@ function showJoke() {
 function showQuote() {
     // Value should be in format: { quote: '', author: '' }
     const randomQuote = getRandomData("quotes");
+    const quote = document.createElement("p");
+    const author = document.createElement("p");
+    quote.textContent = randomQuote.quote;
+    author.textContent = "- " + randomQuote.author;
+    clearAll();
+    const container = document.querySelector(".wisdom-content");
+    container.appendChild(quote);
+    container.appendChild(author);
 }
 
 /**
